@@ -19,14 +19,14 @@ type RequestEngine struct{
 	CarRange int64 `json:"carRange"`
 }
 
-func ValidateEngineRequest(engine Engine)error{
-	if err :=validateDisplacement(engine.Displacement); err!=nil{
+func ValidateEngineRequest(EngineReq Engine)error{
+	if err :=validateDisplacement(EngineReq.Displacement); err!=nil{
 		return err
 	}
-	if err :=validateNoOfCylinders(engine.NoOfCylinders); err!=nil{
+	if err :=validateNoOfCylinders(EngineReq.NoOfCylinders); err!=nil{
 		return err
 	}
-	if err :=validateCarRange(engine.CarRange); err!=nil{
+	if err :=validateCarRange(EngineReq.CarRange); err!=nil{
 		return err
 	}
 	return nil
