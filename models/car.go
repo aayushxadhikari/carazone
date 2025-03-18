@@ -17,7 +17,7 @@ type Car struct{
 	Engine Engine  `json:"engine"`
 	Price float64  `json:"price"`
 	CreatedAt time.Time `json:"created_at"`
-	UpdateAt time.Time `json:"updated_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }
 type CarRequest struct{
 	Name string `json:"name"`
