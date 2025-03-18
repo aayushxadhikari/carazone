@@ -13,7 +13,7 @@ type Engine struct{
 	CarRange int64 `json:"carRange"`
 
 }
-type RequestEngine struct{
+type EngineRequest struct{
 	Displacement int64 `json:"displacement"`
 	NoOfCylinders int64 `json:"noOfCylinders"`
 	CarRange int64 `json:"carRange"`
