@@ -132,5 +132,49 @@ func(e EngineStore) EngineUpdate(ctx context.Context, id string, engineReq *mode
 }
 
 func (e EngineStore) EngineDelete(ctx context.Context, id string) (models.Engine, error){
-	
+	var engine models.Engine
+	tx, err := e.db.BeginTx(ctx, nil)
+	if err != nil{
+		return models.Engine{}, err
+	}
+
+	defer func ()  {
+		if err != nil{
+			if rbErr := tx.Rollback(); rbErr != nil{
+				fmt.Printf("Transaction rollback error: %v\n", rbErr)
+			}
+		}else{
+			if cmErr := tx.Commit(); cmErr!= nil{
+				fmt.Printf("Transaction commit error: %v\n", cmErr)
+			}
+		}
+	}()
+
+	err = tx.QueryRowContext(ctx, "SELECT id, displacement, no_of_cylinders, car_range FROM engine WHERE if =$1", id).Scan(
+		&engine.EngineID,
+		&engine.Displacement,
+		&engine.NoOfCylinders,
+		&engine.CarRange,
+	)
+	if err != nil{
+		if errors.Is(err, sql.ErrNoRows){
+			return engine,nil
+		}
+		return engine, err
+	}
+
+	result, err := tx.ExecContext(ctx, "DELETE FROM engine WHERE id=$1", id)
+	if err != nil{
+		return models.Engine{}, err
+	}
+
+
+	rowAffected, err := result.RowsAffected()
+	if err != nil{
+		return models.Engine{}, err
+	}
+	if rowAffected == 0{
+		return models.Engine{}, errors.New("No Rows Were Updated")
+	}
+	return engine, nil
 }
