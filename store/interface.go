@@ -14,3 +14,10 @@ type CarStoreInterface interface {
 	DeleteCar(ctx context.Context, id string) (models.Car, error)
 }
 
+
+type EngineStoreInterface interface{
+	EngineById(ctx context.Context, id string) (models.Engine, error)
+	EngineCreated(ctx context.Context,engineReq *models.EngineRequest)(models.Engine, error)
+	EngineUpdate(ctx context.Context, id string, engineReq *models.EngineRequest)(models.Engine,error)
+	EngineDelete(ctx context.Context, id string) (models.Engine, error)
+}
