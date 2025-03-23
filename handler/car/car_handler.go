@@ -6,8 +6,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/aayushxadhikari/carazone/models"
-	"github.com/aayushxadhikari/carazone/service"
+	"carazone/models"
+	"carazone/service"
 	"github.com/gorilla/mux"
 )
  

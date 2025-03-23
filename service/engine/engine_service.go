@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 
-	"github.com/aayushxadhikari/carazone/models"
-	"github.com/aayushxadhikari/carazone/store"
+	"carazone/models"
+	"carazone/store"
 )
 
 type EngineService struct{

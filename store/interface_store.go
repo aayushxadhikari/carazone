@@ -3,7 +3,7 @@ package store
 import (
 	"context"
 
-	"github.com/aayushxadhikari/carazone/models"
+	"carazone/models"
 )
 
 type CarStoreInterface interface {

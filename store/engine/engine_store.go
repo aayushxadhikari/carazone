@@ -6,7 +6,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/aayushxadhikari/carazone/models"
+	"carazone/models"
 	"github.com/google/uuid"
 )
 

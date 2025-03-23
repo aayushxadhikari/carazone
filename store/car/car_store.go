@@ -6,7 +6,7 @@ import (
 	"errors"
 	"time"
 
-	"github.com/aayushxadhikari/carazone/models"
+	"carazone/models"
 	"github.com/google/uuid"
 )
 
@@ -14,9 +14,8 @@ type Store struct {
 	db *sql.DB
 }
 
-func new(db *sql.DB) Store {
-	return Store{db: db}
-
+func New(db *sql.DB) Store {
+	return Store{db: db} 
 }
 
 func (s Store) GetCarById(ctx context.Context, id string) (models.Car, error) {

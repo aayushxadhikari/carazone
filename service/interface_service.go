@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 
-	"github.com/aayushxadhikari/carazone/models"
+	"carazone/models"
 )
 
 type CarServiceInterface interface{
