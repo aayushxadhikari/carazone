@@ -2,10 +2,8 @@ package main
 
 import (
 	"carazone/driver"
-	"carazone/car"     
-	"carazone/engine"
-	"carazone/handler" 
 	"database/sql"
+
 	"fmt"
 	"log"
 	"net/http"
@@ -14,6 +12,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 )
+
 
 func main() {
 	if err := godotenv.Load(); err != nil {
@@ -31,18 +30,16 @@ func main() {
 	engineStore := engine.New(db)
 	engineService := engine.NewEngineService(engineStore)
 
-	// Fix handler initialization
-	carHandler := handler.NewCarHandler(carService)
-	engineHandler := handler.NewEngineHandler(engineService)
+	carHandler := handler.car.NewCarHandler(carService)
+	engineHandler := handler.engine.NewEngineHandler(engineService)
 
 	router := mux.NewRouter()
 
 	schemaFile := "store/schema.sql"
-	if err := executeSchemaFile(db, schemaFile); err != nil {
+	if err := executeSchemaFile(db, schemaFile); err!= nil{
 		log.Fatal("Error while executing the schema file:", err)
 	}
 
-	// Rest of your code is fine
 	router.HandleFunc("/cars/{id}", carHandler.GetCarById).Methods("GET")
 	router.HandleFunc("/cars", carHandler.GetCarByBrand).Methods("GET")
 	router.HandleFunc("/cars", carHandler.CreateCar).Methods("POST")
@@ -66,12 +63,12 @@ func main() {
 
 func executeSchemaFile(db *sql.DB, fileName string) error {
 	sqlFile, err := os.ReadFile(fileName)
-	if err != nil {
+	if err != nil{
 		return err
 	}
 
-	if _, err := db.Exec(string(sqlFile)); err != nil {
+	if _, err := db.Exec(string(sqlFile)); err != nil{
 		return err
 	}
 	return nil
-}
+}	
