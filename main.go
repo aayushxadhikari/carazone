@@ -2,13 +2,17 @@ package main
 
 import (
 	"carazone/driver"
+	"carazone/service/car_service"
+	"carazone/service/engine_service"
+	"carazone/store/car_store"
+	"carazone/store/engine_store"
 	"database/sql"
-
 	"fmt"
 	"log"
 	"net/http"
 	"os"
-
+	"carazone/handler/car_handler"
+	"carazone/handler/engine_handler"
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 )
@@ -24,14 +28,14 @@ func main() {
 
 	db := driver.GetDB()
 
-	carStore := car.New(db)
-	carService := car.NewCarService(carStore)
+	carStore := car_store.New(db)
+	carService := car_service.NewCarService(carStore)
 
-	engineStore := engine.New(db)
-	engineService := engine.NewEngineService(engineStore)
+	engineStore := engine_store.New(db)
+	engineService := engine_service.NewEngineService(engineStore)
 
-	carHandler := handler.car.NewCarHandler(carService)
-	engineHandler := handler.engine.NewEngineHandler(engineService)
+	carHandler := car_handler.NewCarHandler(carService)
+	engineHandler := engine_handler.NewEngineHandler(engineService)
 
 	router := mux.NewRouter()
 

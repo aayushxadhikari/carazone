@@ -1,4 +1,4 @@
-package car
+package car_service
 
 import (
 	"context"
@@ -56,10 +56,10 @@ func (s *CarService) UpdateCar(ctx context.Context, id string, carReq *models.Ca
 	return &updatedCar, err
 }
 
-func (s *CarService) DeleteCar(ctx context.Context, id string, carReq *models.CarRequest)(*models.Car, error){
-	deleteCar, err:= s.store.DeleteCar(ctx, id)
-	if err!=nil{
-		return nil,err
+func (s *CarService) DeleteCar(ctx context.Context, id string) (*models.Car, error) {
+	deleteCar, err := s.store.DeleteCar(ctx, id)
+	if err != nil {
+		return nil, err
 	}
-	return &deleteCar, err
+	return &deleteCar, nil 
 }
