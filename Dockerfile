@@ -1,3 +1,4 @@
+#docker file for deployment
 FROM golang:latest
 
 WORKDIR /app
